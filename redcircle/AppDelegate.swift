@@ -12,10 +12,33 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    static let baseURLString = "http://snowjlz.gicp.net:19959/redcircle"
+
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        self.window?.backgroundColor = UIColor.lightGray
+        let userInfo = UserDefaults.standard.value(forKey: "USER_INFO") as? NSDictionary
+        if userInfo == nil {
+            let loginController = LoginController()
+            let loginNavController = UINavigationController(rootViewController: loginController)
+            self.window?.rootViewController = loginNavController
+            //            self.presentViewController(loginController, animated: true, completion: { () -> Void in
+            //
+            //            })
+        } else {
+            let homeController = HomeController()
+            self.window?.rootViewController = homeController
+        }
+        
+        
+        SMSSDK.registerApp("111412781a7c4", withSecret: "81008993f3de84d463ccd91cf4bb7509")
+        RCIM.shared().initWithAppKey("sfci50a7c2fsi")
+
+        
         return true
     }
 
