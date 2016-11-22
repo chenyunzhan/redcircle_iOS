@@ -12,10 +12,15 @@ import Alamofire
 
 
 
-class MessageController: RCConversationListViewController{
+class MessageController: RCConversationListViewController, RCIMUserInfoDataSource{
+
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "消息"
+        RCIM.shared().userInfoDataSource = self
         
         let emptyLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 50, height: 50))
         emptyLabel.text = "请在朋友页面发起会话"
@@ -108,6 +113,54 @@ class MessageController: RCConversationListViewController{
         // Dispose of any resources that can be recreated.
     }
     
+    
+    /*!
+     获取用户信息
+     
+     @param userId      用户ID
+     @param completion  获取用户信息完成之后需要执行的Block [userInfo:该用户ID对应的用户信息]
+     
+     @discussion SDK通过此方法获取用户信息并显示，请在completion中返回该用户ID对应的用户信息。
+     在您设置了用户信息提供者之后，SDK在需要显示用户信息的时候，会调用此方法，向您请求用户信息用于显示。
+     */
+    public func getUserInfo(withUserId userId: String!, completion: ((RCUserInfo?) -> Void)!) {
+        
+        let x = arc4random() % 100
+//        let parameters = [
+//            "friendArrayMap": self.friendArray as AnyObject,
+//            "meInfo": self.meInfo as AnyObject
+//        ]
+        
+        let parameters = [
+            "mePhone": userId as String,
+            "random":String(x)
+        ]
+        
+        
+        
+        
+        Alamofire.request(AppDelegate.baseURLString + "/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
+            
+            switch response.result {
+            case .success:
+                let userDic = response.result.value as? NSDictionary
+                
+                if(userDic!["name"] != nil) {
+                    if (userDic!["name"] as! String == "") {
+                        completion?(RCUserInfo.init(userId: userId, name: userId, portrait: AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId + "&type=thumbnail"))
+                    } else {
+                        completion?(RCUserInfo.init(userId: userId, name: userDic!["name"] as? String, portrait: AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId + "&type=thumbnail"))
+                    }
+                } else {
+                    completion?(RCUserInfo.init(userId: userId, name: userId, portrait: nil))
+                }
+            case .failure(let error):
+                print(error)
+                completion?(RCUserInfo.init(userId: userId, name: userId, portrait: nil))
+            }
+            
+        }
+    }
 
     /*
     // MARK: - Navigation

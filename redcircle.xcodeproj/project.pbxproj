@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7ACECE499E9D34B970D1D3B0 /* Pods_redcircle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AEEB2A166B33778D4E1836 /* Pods_redcircle.framework */; };
 		7F44E2471DC9CBB300D2313C /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F44E2461DC9CBB300D2313C /* BookTableViewCell.swift */; };
+		7F8CD1131DDD54CF008B3CD0 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8CD1121DDD54CF008B3CD0 /* ChatController.swift */; };
 		7F9904381DC711970007B681 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9904371DC711970007B681 /* AppDelegate.swift */; };
 		7F99043A1DC711970007B681 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9904391DC711970007B681 /* ViewController.swift */; };
 		7F99043D1DC711970007B681 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F99043B1DC711970007B681 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		45AEEB2A166B33778D4E1836 /* Pods_redcircle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_redcircle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F069C3D86662175E61EEB /* Pods-redcircle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.release.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.release.xcconfig"; sourceTree = "<group>"; };
 		7F44E2461DC9CBB300D2313C /* BookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		7F8CD1121DDD54CF008B3CD0 /* ChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		7F9904341DC711970007B681 /* redcircle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = redcircle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F9904371DC711970007B681 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F9904391DC711970007B681 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				7F9B019F1DC871AD000FB5F8 /* FriendController.swift */,
 				7FCE42031DD1BA9000677CE9 /* UserDetailController.swift */,
 				7FCE42051DD1BBB500677CE9 /* ModifyRelationController.swift */,
+				7F8CD1121DDD54CF008B3CD0 /* ChatController.swift */,
 			);
 			path = redcircle;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				7F9B01981DC83DFB000FB5F8 /* MessageController.swift in Sources */,
 				7FCE42041DD1BA9000677CE9 /* UserDetailController.swift in Sources */,
 				7F9B019A1DC8420E000FB5F8 /* CellModel.swift in Sources */,
+				7F8CD1131DDD54CF008B3CD0 /* ChatController.swift in Sources */,
 				7F99043A1DC711970007B681 /* ViewController.swift in Sources */,
 				7FCE42061DD1BBB500677CE9 /* ModifyRelationController.swift in Sources */,
 				7F99044A1DC716EF0007B681 /* LoginController.swift in Sources */,
