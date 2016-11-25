@@ -161,6 +161,28 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
             
         }
     }
+    
+    
+    override func onSelectedTableRow(_ conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, at indexPath: IndexPath!) {
+        //打开会话界面
+        let chat = ChatController(conversationType: model.conversationType, targetId: model.targetId)
+        chat?.title = model.conversationTitle;
+        chat?.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(chat!, animated: true)
+        self.notifyUpdateUnreadMessageCount()
+    }
+    
+    
+//    //重写RCConversationListViewController的onSelectedTableRow事件
+//    override func onSelectedTableRow(conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, atIndexPath indexPath: NSIndexPath!) {
+//        //打开会话界面
+//        let chat = ChatController(conversationType: model.conversationType, targetId: model.targetId)
+//        chat.title = model.conversationTitle;
+//        chat.hidesBottomBarWhenPushed = true
+//        self.navigationController?.pushViewController(chat, animated: true)
+//        self.notifyUpdateUnreadMessageCount()
+//        
+//    }
 
     /*
     // MARK: - Navigation

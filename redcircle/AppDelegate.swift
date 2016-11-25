@@ -13,9 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    static let baseURLString = "http://snowjlz.gicp.net:19959/redcircle"
+//    static let baseURLString = "http://127.0.0.1:8080"
 
-
+static let baseURLString = "http://snowjlz.gicp.net:19959/redcircle"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

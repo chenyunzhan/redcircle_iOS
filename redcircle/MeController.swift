@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+
 
 class MeController: UITableViewController {
     
@@ -110,6 +112,15 @@ class MeController: UITableViewController {
         let sectionArray = self.tableData![section]
         return (sectionArray as! NSArray).count
     }
+    
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if(indexPath.section == 0) {
+            return 80
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -124,6 +135,32 @@ class MeController: UITableViewController {
         cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         cell?.textLabel?.text = cellModel.title
         cell?.detailTextLabel?.text = cellModel.desc
+        
+        
+        if(indexPath.section == 0) {
+            
+            
+            let imageView = UIImageView()
+            cell?.contentView.addSubview(imageView)
+            cell?.accessoryType = UITableViewCellAccessoryType.none
+            
+            imageView.snp.makeConstraints({ (make) in
+                make.centerY.equalTo((cell?.contentView)!)
+                make.right.equalTo((cell?.contentView)!).offset(-18)
+                make.height.equalTo(60)
+                make.width.equalTo(60)
+            })
+            
+            
+            Alamofire.request(cellModel.image).responseData { response in
+                if let data = response.result.value {
+                    let image = UIImage(data: data)
+                    imageView.image = image
+                    
+                }
+            }
+            
+        }
         
         
         return cell!
@@ -150,18 +187,18 @@ class MeController: UITableViewController {
         } else if(indexPath.section == 0) {
 //            self.pickPhoto()
         } else if(indexPath.section == 1) {
-//            let meCircle = MeCircleController()
-//            if(indexPath.row == 0) {
-//                meCircle.circleLevel = "2"
-//            } else if (indexPath.row == 1) {
-//                meCircle.circleLevel = "1"
-//            } else if (indexPath.row == 2) {
-//                meCircle.circleLevel = "0"
-//            }
-//            
-//            
-//            meCircle.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(meCircle, animated: true)
+            let meCircle = MeCircleController()
+            if(indexPath.row == 0) {
+                meCircle.circleLevel = "2"
+            } else if (indexPath.row == 1) {
+                meCircle.circleLevel = "1"
+            } else if (indexPath.row == 2) {
+                meCircle.circleLevel = "0"
+            }
+            
+            
+            meCircle.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(meCircle, animated: true)
         }
     }
 

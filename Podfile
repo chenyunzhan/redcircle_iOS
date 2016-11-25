@@ -8,4 +8,8 @@ target 'redcircle' do
     pod 'SMSSDK'
     pod 'Alamofire'
     pod 'RongCloudIMKit'
+    pod 'DGElasticPullToRefresh'
+    pod 'ActiveLabel'
+    pod 'SKPhotoBrowser', :git => 'https://github.com/suzuki-0000/SKPhotoBrowser.git', :branch => 'swift3'
+
 end
