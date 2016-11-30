@@ -164,10 +164,15 @@ class MeCircleController: UITableViewController, SKPhotoBrowserDelegate {
     }
     
     func addArticleAction() {
-//        let addArticle = AddArticleController()
-//        addArticle.initWithClosure(someFunctionThatTakesAClosure)
-//        
-//        self.navigationController?.pushViewController(addArticle, animated: true)
+        let addArticle = AddArticleController()
+        addArticle.initWithClosure(closure: someFunctionThatTakesAClosure)
+        
+        self.navigationController?.pushViewController(addArticle, animated: true)
+    }
+    
+    
+    func someFunctionThatTakesAClosure(string:String) -> Void {
+        self.viewDidLoad()
     }
     
     func refreshData() -> Void {

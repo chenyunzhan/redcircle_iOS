@@ -157,7 +157,7 @@ class FriendController: UIViewController {
                 friendController.meInfo = NSDictionary(dictionary: ["me_phone":(self.userPhoneTextField?.text)!])
                 self.navigationController?.pushViewController(friendController, animated: true)
             } else {
-                print("错误信息：%@",error);
+                print("错误信息：%@",error ?? "");
             }
         }
     }

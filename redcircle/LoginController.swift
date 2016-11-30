@@ -260,7 +260,7 @@ class LoginController: UIViewController {
                 let cancelAction = UIAlertAction(title: "确定", style: .cancel, handler: nil)
                 alertController.addAction(cancelAction)
                 self.present(alertController, animated: true, completion: nil)
-                print("错误信息：%@",error);
+                print("错误信息：%@",error ?? "");
             }
         }
     }
