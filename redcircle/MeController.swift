@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import ImagePickerSheetController
+import Photos
 
 
 class MeController: UITableViewController {
@@ -15,6 +17,13 @@ class MeController: UITableViewController {
     
     var tableData: NSMutableArray?
 
+    
+    private let sessionManager: SessionManager = {
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = SessionManager.defaultHTTPHeaders
+        
+        return SessionManager(configuration: configuration)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,11 +178,11 @@ class MeController: UITableViewController {
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 2) {
-//            let cellModel = (self.tableData![indexPath.section] as! NSArray)[indexPath.row] as! CellModel
-//            let modifyController = ModifyController()
-//            modifyController.subTitle = cellModel.title
-//            modifyController.hidesBottomBarWhenPushed = true
-//            self.navigationController?.pushViewController(modifyController, animated: true)
+            let cellModel = (self.tableData![indexPath.section] as! NSArray)[indexPath.row] as! CellModel
+            let modifyController = ModifyController()
+            modifyController.subTitle = cellModel.title
+            modifyController.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(modifyController, animated: true)
         } else if (indexPath.section == 3) {
             let loginController = LoginController()
             let loginNavController = UINavigationController(rootViewController: loginController)
@@ -185,7 +194,7 @@ class MeController: UITableViewController {
             UserDefaults.standard.removePersistentDomain(forName: appDomain!)
             
         } else if(indexPath.section == 0) {
-//            self.pickPhoto()
+            self.pickPhoto()
         } else if(indexPath.section == 1) {
             let meCircle = MeCircleController()
             if(indexPath.row == 0) {
@@ -207,5 +216,234 @@ class MeController: UITableViewController {
         self.viewDidLoad()
         self.tableView.reloadData()
     }
+    
+    func pickPhoto() {
+        
+        let presentImagePickerController: (UIImagePickerControllerSourceType) -> () = { source in
+            let controller = UIImagePickerController()
+            controller.delegate = self
+            //            controller.allowsEditing = true
+            var sourceType = source
+            if (!UIImagePickerController.isSourceTypeAvailable(sourceType)) {
+                sourceType = .photoLibrary
+                print("Fallback to camera roll as a source since the simulator doesn't support taking pictures")
+            }
+            controller.sourceType = sourceType
+            
+            self.present(controller, animated: true, completion: nil)
+        }
+        
+        
+        let controller = ImagePickerSheetController(mediaType: .imageAndVideo)
+        controller.delegate = self
+        
+        controller.addAction(ImagePickerAction(title: NSLocalizedString("拍照", comment: "Action Title"), secondaryTitle: NSLocalizedString("确定选择", comment: "Action Title"), handler: { _ in
+            presentImagePickerController(.camera)
+        }, secondaryHandler: { _, numberOfPhotos in
+            print("Comment \(numberOfPhotos) photos")
+            let originalImage = controller.selectedAssets[0];
+            let option = PHContentEditingInputRequestOptions()
+            originalImage.requestContentEditingInput(with: option, completionHandler: { (contentEditingInput, info) -> Void in
+                let imageURL = contentEditingInput?.fullSizeImageURL
+                print(imageURL!)
+            })
+            
+            self.cacheUploadImage(originalImage: originalImage)
+                
+            
+            
+            
+        }))
+        controller.addAction(ImagePickerAction(title: NSLocalizedString("从相册中选取", comment: "Action Title"), secondaryTitle: { NSString.localizedStringWithFormat(NSLocalizedString("从相册中选取", comment: "Action Title") as NSString, $0) as String}, handler: { _ in
+            presentImagePickerController(.photoLibrary)
+        }, secondaryHandler: { _, numberOfPhotos in
+            print("Send \(controller.selectedAssets)")
+        }))
+        controller.addAction(ImagePickerAction(cancelTitle: NSLocalizedString("取消", comment: "Action Title")))
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            controller.modalPresentationStyle = .popover
+            controller.popoverPresentationController?.sourceView = view
+            controller.popoverPresentationController?.sourceRect = CGRect(origin: view.center, size: CGSize())
+        }
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    
+    func cacheUploadImage(originalImage:PHAsset) -> Void {
+        let options = PHImageRequestOptions()
+        options.resizeMode = PHImageRequestOptionsResizeMode.exact
+        options.deliveryMode = PHImageRequestOptionsDeliveryMode.opportunistic
+        options.isSynchronous = true
+        PHImageManager.default().requestImage(for: originalImage, targetSize: CGSize(width: 600, height: 600), contentMode: .aspectFill, options: options, resultHandler: { (image, info) in
+            print(image!)
+            let filePath:String = NSHomeDirectory() +  "/Documents/photo_temp.png"
+            let data:NSData = UIImagePNGRepresentation(image!)! as NSData
+            data.write(toFile: filePath, atomically: true)
+        })
+        
+        
+        PHImageManager.default().requestImage(for: originalImage, targetSize: CGSize(width: 80, height: 80), contentMode: .aspectFill, options: options, resultHandler: { (image, info) in
+            print(image!)
+            let filePath:String = NSHomeDirectory() + "/Documents/photo_temp_thumbnail.png"
+            let data:NSData = UIImagePNGRepresentation(image!)! as NSData
+            data.write(toFile: filePath, atomically: true)
+
+        })
+        
+        
+        self.uploadPhoto()
+
+        
+    }
+    
+    
+    func uploadPhoto() {
+        let fileStr = NSHomeDirectory() + "/Documents/photo_temp.png"
+        let fileURL = NSURL(fileURLWithPath: fileStr)
+        
+        let thumbnailFileStr = NSHomeDirectory() + "/Documents/photo_temp_thumbnail.png"
+        let thumbnailFileURL = NSURL(fileURLWithPath: thumbnailFileStr)
+        
+        let userDic = UserDefaults.standard.dictionary(forKey: "USER_INFO")
+        let mePhone = userDic!["mePhone"] as! String + ".png"
+
+        sessionManager.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(mePhone.data(using: String.Encoding.utf8)!, withName: "name")
+                multipartFormData.append(fileURL as URL, withName: "file")
+                multipartFormData.append(thumbnailFileURL as URL, withName: "thumbnail")
+            },
+            to: AppDelegate.baseURLString + "/uploadPhoto",
+            encodingCompletion: { encodingResult in
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON { response in
+                        debugPrint(response)
+                        self.updateUser()
+                    }
+                case .failure(let encodingError):
+                    print(encodingError)
+                }
+            }
+        )
+
+    }
+    
+    
+    func updateUser() {
+        
+        let userDic = UserDefaults.standard.object(forKey: "USER_INFO") as! NSDictionary
+        let mePhone = userDic["mePhone"] as! String
+
+        
+        let parameters = [
+            "mePhone": mePhone
+        ]
+        
+        
+        Alamofire.request(AppDelegate.baseURLString + "/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
+            
+            switch response.result {
+            case .success:
+                let userDic = response.result.value as? NSDictionary
+                UserDefaults.standard.set(userDic, forKey: "USER_INFO")
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "USER_INFO_CHANGE"), object: self)
+                _ = self.navigationController?.popViewController(animated: true)
+            case .failure(let error):
+                print(error)
+            }
+            
+        }
+        
+        
+//        let userDic = NSUserDefaults.standardUserDefaults().objectForKey("USER_INFO")
+//        let mePhone = userDic!["mePhone"] as! String
+//        let parameters = [
+//            "mePhone": mePhone
+//        ]
+//        Alamofire.request(.POST, AppDelegate.baseURLString + "/login", parameters: parameters, encoding: .JSON).responseJSON { response in
+//            if response.result.isSuccess {
+//                let userDic = response.result.value as? NSDictionary
+//                NSUserDefaults.standardUserDefaults().setObject(userDic, forKey: "USER_INFO")
+//                NSNotificationCenter.defaultCenter().postNotificationName("USER_INFO_CHANGE", object: self)
+//                
+//                self.userInfoChange()
+//            }
+//        }
+    }
 
 }
+
+
+// MARK: - UIImagePickerControllerDelegate
+extension MeController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        //        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        //
+        //        }
+        
+        
+        guard let assetURL = info[UIImagePickerControllerReferenceURL] as? NSURL else {
+            if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                print(image)
+            }
+            return
+        }
+        let fetchResult = PHAsset.fetchAssets(withALAssetURLs: [assetURL as URL], options: nil)
+        
+        guard let asset = (fetchResult.firstObject as Any) as? PHAsset else {
+            if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                print(image)
+            }
+            return
+        }
+        
+        self.cacheUploadImage(originalImage: asset)
+        
+        
+        picker.dismiss(animated: true, completion: nil)
+        
+        
+    }
+    
+    
+}
+
+// MARK: - ImagePickerSheetControllerDelegate
+extension MeController: ImagePickerSheetControllerDelegate {
+    
+    func controllerWillEnlargePreview(_ controller: ImagePickerSheetController) {
+        print("Will enlarge the preview")
+    }
+    
+    func controllerDidEnlargePreview(_ controller: ImagePickerSheetController) {
+        print("Did enlarge the preview")
+    }
+    
+    
+    func controller(_ controller: ImagePickerSheetController, willSelectAsset asset: PHAsset) {
+        print("Will select an asset")
+    }
+    
+    func controller(_ controller: ImagePickerSheetController, didSelectAsset asset: PHAsset) {
+        print("Did select an asset")
+    }
+    
+    func controller(_ controller: ImagePickerSheetController, willDeselectAsset asset: PHAsset) {
+        print("Will deselect an asset")
+    }
+    
+    func controller(_ controller: ImagePickerSheetController, didDeselectAsset asset: PHAsset) {
+        print("Did deselect an asset")
+    }
+    
+}
+

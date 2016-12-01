@@ -76,6 +76,8 @@ class MeCircleController: UITableViewController, SKPhotoBrowserDelegate {
     }
     
     
+    
+    
     override func loadView() {
         super.loadView()
 //        keyboardTextField = SYKeyboardTextField(point: CGPointMake(0, 0), width: self.view.width)
@@ -98,6 +100,11 @@ class MeCircleController: UITableViewController, SKPhotoBrowserDelegate {
         keyboardTextField.toFullyBottom()
         keyboardTextField.isHidden = true
 
+    }
+    
+    
+    deinit {
+        self.tableView.dg_removePullToRefresh()
     }
     
     
@@ -164,10 +171,15 @@ class MeCircleController: UITableViewController, SKPhotoBrowserDelegate {
     }
     
     func addArticleAction() {
-//        let addArticle = AddArticleController()
-//        addArticle.initWithClosure(someFunctionThatTakesAClosure)
-//        
-//        self.navigationController?.pushViewController(addArticle, animated: true)
+        let addArticle = AddArticleController()
+        addArticle.initWithClosure(closure: someFunctionThatTakesAClosure)
+        
+        self.navigationController?.pushViewController(addArticle, animated: true)
+    }
+    
+    
+    func someFunctionThatTakesAClosure(string:String) -> Void {
+        self.viewDidLoad()
     }
     
     func refreshData() -> Void {
@@ -224,16 +236,16 @@ class MeCircleController: UITableViewController, SKPhotoBrowserDelegate {
     func keyboardWillAppear(notification: NSNotification) {
         
         // 获取键盘信息
-//        let keyboardinfo = notification.userInfo![UIKeyboardFrameBeginUserInfoKey]
-//        
-//        let keyboardheight:CGFloat = (keyboardinfo?.CGRectValue.size.height)!
-//        
-//        
-//        self.keyboardheight = keyboardheight
-//        
-//        print("键盘弹起")
-//        
-//        print(keyboardheight)
+        let keyboardinfo = notification.userInfo![UIKeyboardFrameBeginUserInfoKey]
+        
+        let keyboardheight:CGFloat = ((keyboardinfo as AnyObject).cgRectValue.size.height)
+        
+        
+        self.keyboardheight = keyboardheight
+        
+        print("键盘弹起")
+        
+        print(keyboardheight)
         
     }
     

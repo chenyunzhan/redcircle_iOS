@@ -47,7 +47,7 @@ class BookTableViewCell: UITableViewCell {
         
         nameLabel.snp.makeConstraints { (make) -> Void in
             make.centerY.equalTo(self.contentView)
-            make.right.equalTo(self.contentView).offset(20)
+            make.right.equalTo(descLabel.snp.left).offset(-8)
             make.left.equalTo(self.contentView).offset(20)
         }
         

@@ -11,5 +11,6 @@ target 'redcircle' do
     pod 'DGElasticPullToRefresh'
     pod 'ActiveLabel'
     pod 'SKPhotoBrowser', :git => 'https://github.com/suzuki-0000/SKPhotoBrowser.git', :branch => 'swift3'
+    pod 'ImagePickerSheetController', :git => 'https://github.com/lbrndnr/ImagePickerSheetController.git', :branch => 'swift3'
 
 end

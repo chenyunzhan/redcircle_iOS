@@ -58,7 +58,7 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         commentTableView = UITableView()
         commentTableView.delegate = self
         commentTableView.dataSource = self
-//        commentTableView.backgroundView = UIImageView.init(image: UIImage(named: "comment_table_back_image")?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 20, 5, 5)))
+        commentTableView.backgroundView = UIImageView.init(image: UIImage(named: "comment_table_back_image")?.resizableImage(withCapInsets: UIEdgeInsetsMake(20, 20, 5, 5)))
         commentTableView.backgroundColor = UIColor.clear
         commentTableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 10))
         commentTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 10))
@@ -178,6 +178,13 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         }
         return cell
         
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        controller.keyboardTextField.show()
+        controller.keyboardTextField.isHidden = false
+        controller.toComment = self.commentData![indexPath.row] as? NSDictionary
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

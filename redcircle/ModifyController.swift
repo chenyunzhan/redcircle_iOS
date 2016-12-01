@@ -1,8 +1,8 @@
 //
-//  ModifyRelationController.swift
+//  ModifyController.swift
 //  redcircle
 //
-//  Created by zhan on 16/11/8.
+//  Created by zhan on 16/12/1.
 //  Copyright © 2016年 zhan. All rights reserved.
 //
 
@@ -10,34 +10,21 @@ import UIKit
 import Alamofire
 
 
-typealias sendValueClosure=(_ string:String)->Void
+class ModifyController: UIViewController {
 
-
-class ModifyRelationController: UIViewController {
-    
-    
-    
-    var mePhone: String?
-    var friendPhone: String?
+    var subTitle: String = ""
     var textField: UITextField?
     
-    //声明一个闭包
-    var myClosure:sendValueClosure?
-    //下面这个方法需要传入上个界面的someFunctionThatTakesAClosure函数指针
-    func initWithClosure(closure:sendValueClosure?){
-        //将函数指针赋值给myClosure闭包，该闭包中涵盖了someFunctionThatTakesAClosure函数中的局部变量等的引用
-        myClosure = closure
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "朋友推荐语"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.done, target: self, action: #selector(ModifyRelationController.doModifyAction));
+
+        self.title = "修改" + self.subTitle
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "修改", style: UIBarButtonItemStyle.done, target: self, action: #selector(ModifyController.doModifyAction));
         
         self.view.backgroundColor = UIColor.white
         
         let textField = UITextField()
-        textField.placeholder = "请用一句话来描述朋友和你的关系或推荐语"
+        textField.placeholder = "请输入新的" + self.subTitle
         self.textField = textField
         self.view.addSubview(textField)
         
@@ -58,7 +45,6 @@ class ModifyRelationController: UIViewController {
             make.left.equalTo(self.view).offset(20)
             make.height.equalTo(40)
         }
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,33 +52,56 @@ class ModifyRelationController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
+    
     func doModifyAction() {
         
+        var userParam = "name"
+        
+        if self.subTitle == "性别" {
+            userParam = "sex"
+        }
+        
+        let userDic = UserDefaults.standard.object(forKey: "USER_INFO") as! NSDictionary
+        let mePhone = userDic["mePhone"] as! String
+        
         let parameters = [
-            "mePhone" : mePhone!,
-            "friendPhone"   : friendPhone!,
-            "recommendLanguage" : (self.textField?.text)!
+            userParam : self.textField?.text as Any,
+            "mePhone"   : mePhone 
         ]
         
         
-        Alamofire.request(AppDelegate.baseURLString + "/modifyDetail", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
+        
+        Alamofire.request(AppDelegate.baseURLString + "/modify", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
             if response.result.isSuccess {
-
+                
             }
             
             switch response.result {
             case .success:
-                //判空
-                if (self.myClosure != nil){
-                    //闭包隐式调用someFunctionThatTakesAClosure函数：回调。
-                    self.myClosure!("好好哦")
+                let parameters = [
+                    "mePhone": mePhone
+                ]
+                
+                
+                Alamofire.request(AppDelegate.baseURLString + "/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
+                    
+                    switch response.result {
+                    case .success:
+                        let userDic = response.result.value as? NSDictionary
+                        UserDefaults.standard.set(userDic, forKey: "USER_INFO")
+                        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "USER_INFO_CHANGE"), object: self)
+                        _ = self.navigationController?.popViewController(animated: true)
+                    case .failure(let error):
+                        print(error)
+                    }
+                    
                 }
-                _ = self.navigationController?.popViewController(animated: true)
+                
             case .failure(let error):
                 print(error)
             }
         }
-        
     }
     /*
     // MARK: - Navigation
