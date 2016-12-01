@@ -180,33 +180,10 @@ class AddArticleController: BaseViewController, UITextViewDelegate,UICollectionV
                     print(imageURL!)
                 })
                 
+                self.cacheUploadImage(originalImage: originalImage)
                 
-                let options = PHImageRequestOptions()
-                options.resizeMode = PHImageRequestOptionsResizeMode.exact
-                options.deliveryMode = PHImageRequestOptionsDeliveryMode.opportunistic
-                options.isSynchronous = true
-                PHImageManager.default().requestImage(for: originalImage, targetSize: CGSize(width: 600, height: 600), contentMode: .aspectFill, options: options, resultHandler: { (image, info) in
-                    print(image!)
-                    let randomUnique = UtilManager.randomString(len: 32)
-                    let filePath:String = NSHomeDirectory() + "/Documents/" + randomUnique + ".png"
-                    let data:NSData = UIImagePNGRepresentation(image!)! as NSData
-                    data.write(toFile: filePath, atomically: true)
-                    self.originalImageArray?.append(filePath)
-                })
-                
-                
-                PHImageManager.default().requestImage(for: originalImage, targetSize: CGSize(width: 80, height: 80), contentMode: .aspectFill, options: options, resultHandler: { (image, info) in
-                    print(image!)
-                    let randomUnique = UtilManager.randomString(len: 32)
-                    let filePath:String = NSHomeDirectory() + "/Documents/" + randomUnique + ".png"
-                    let data:NSData = UIImagePNGRepresentation(image!)! as NSData
-                    data.write(toFile: filePath, atomically: true)
-                    self.thumbnailImageArray?.append(filePath)
-                    self.imageData?.insert(filePath, at: 0)
-                })
             }
             
-            self.collectionView.reloadData()
 
             
         }))
@@ -225,6 +202,36 @@ class AddArticleController: BaseViewController, UITextViewDelegate,UICollectionV
         
         present(controller, animated: true, completion: nil)
     }
+    
+    func cacheUploadImage(originalImage:PHAsset) -> Void {
+        let options = PHImageRequestOptions()
+        options.resizeMode = PHImageRequestOptionsResizeMode.exact
+        options.deliveryMode = PHImageRequestOptionsDeliveryMode.opportunistic
+        options.isSynchronous = true
+        PHImageManager.default().requestImage(for: originalImage, targetSize: CGSize(width: 600, height: 600), contentMode: .aspectFill, options: options, resultHandler: { (image, info) in
+            print(image!)
+            let randomUnique = UtilManager.randomString(len: 32)
+            let filePath:String = NSHomeDirectory() + "/Documents/" + randomUnique + ".png"
+            let data:NSData = UIImagePNGRepresentation(image!)! as NSData
+            data.write(toFile: filePath, atomically: true)
+            self.originalImageArray?.append(filePath)
+        })
+        
+        
+        PHImageManager.default().requestImage(for: originalImage, targetSize: CGSize(width: 80, height: 80), contentMode: .aspectFill, options: options, resultHandler: { (image, info) in
+            print(image!)
+            let randomUnique = UtilManager.randomString(len: 32)
+            let filePath:String = NSHomeDirectory() + "/Documents/" + randomUnique + ".png"
+            let data:NSData = UIImagePNGRepresentation(image!)! as NSData
+            data.write(toFile: filePath, atomically: true)
+            self.thumbnailImageArray?.append(filePath)
+            self.imageData?.insert(filePath, at: 0)
+        })
+        
+        self.collectionView.reloadData()
+
+    }
+    
     
     func addArticle() -> Void {
         
@@ -294,6 +301,38 @@ extension AddArticleController: UIImagePickerControllerDelegate, UINavigationCon
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+//        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+//
+//        }
+        
+        
+        guard let assetURL = info[UIImagePickerControllerReferenceURL] as? NSURL else {
+            if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                print(image)
+            }
+            return
+        }
+        let fetchResult = PHAsset.fetchAssets(withALAssetURLs: [assetURL as URL], options: nil)
+        
+        guard let asset = (fetchResult.firstObject as Any) as? PHAsset else {
+            if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                print(image)
+            }
+            return
+        }
+        
+        self.cacheUploadImage(originalImage: asset)
+        
+        
+        picker.dismiss(animated: true, completion: nil)
+
+
+    }
+    
+    
 }
 
 // MARK: - ImagePickerSheetControllerDelegate

@@ -217,6 +217,30 @@ class UserDetailController: UITableViewController {
         }
         return 44
     }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            let modifyRelation = ModifyRelationController()
+            modifyRelation.friendPhone = friendPhone
+            modifyRelation.mePhone = mePhone
+            modifyRelation.initWithClosure(closure: someFunctionThatTakesAClosure)
+            modifyRelation.hidesBottomBarWhenPushed = true
+            
+            self.navigationController?.pushViewController(modifyRelation, animated: true)
+        } else if indexPath.section == 1 {
+            let meCircle = MeCircleController()
+            meCircle.circleLevel = "0"
+            meCircle.mePhone = friendPhone
+            meCircle.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(meCircle, animated: true)
+        }
+    }
+    
+    
+    func someFunctionThatTakesAClosure(string:String) -> Void {
+        self.viewDidLoad()
+    }
 
 
 }

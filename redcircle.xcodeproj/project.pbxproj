@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7ACECE499E9D34B970D1D3B0 /* Pods_redcircle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AEEB2A166B33778D4E1836 /* Pods_redcircle.framework */; };
 		7F44E2471DC9CBB300D2313C /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F44E2461DC9CBB300D2313C /* BookTableViewCell.swift */; };
+		7F7387511DEFBD4D00A52BFD /* ModifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7387501DEFBD4D00A52BFD /* ModifyController.swift */; };
 		7F7499F61DE6D35100A9BEC5 /* SYKeyboardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7499F51DE6D35100A9BEC5 /* SYKeyboardTextField.swift */; };
 		7F88B5721DED0A610042D5B5 /* AddArticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88B5711DED0A610042D5B5 /* AddArticleController.swift */; };
 		7F88B5741DED3EFF0042D5B5 /* UtilManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88B5731DED3EFF0042D5B5 /* UtilManager.swift */; };
@@ -38,6 +39,7 @@
 		45AEEB2A166B33778D4E1836 /* Pods_redcircle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_redcircle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F069C3D86662175E61EEB /* Pods-redcircle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.release.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.release.xcconfig"; sourceTree = "<group>"; };
 		7F44E2461DC9CBB300D2313C /* BookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		7F7387501DEFBD4D00A52BFD /* ModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyController.swift; sourceTree = "<group>"; };
 		7F7499F51DE6D35100A9BEC5 /* SYKeyboardTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYKeyboardTextField.swift; sourceTree = "<group>"; };
 		7F88B5711DED0A610042D5B5 /* AddArticleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddArticleController.swift; sourceTree = "<group>"; };
 		7F88B5731DED3EFF0042D5B5 /* UtilManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilManager.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				7FA230411DE53DE10060EE93 /* MeCircleController.swift */,
 				7F88B5711DED0A610042D5B5 /* AddArticleController.swift */,
 				7F88B5751DED5BCB0042D5B5 /* BaseViewController.swift */,
+				7F7387501DEFBD4D00A52BFD /* ModifyController.swift */,
 			);
 			path = redcircle;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 				7F44E2471DC9CBB300D2313C /* BookTableViewCell.swift in Sources */,
 				7F9B01981DC83DFB000FB5F8 /* MessageController.swift in Sources */,
 				7FCE42041DD1BA9000677CE9 /* UserDetailController.swift in Sources */,
+				7F7387511DEFBD4D00A52BFD /* ModifyController.swift in Sources */,
 				7F9B019A1DC8420E000FB5F8 /* CellModel.swift in Sources */,
 				7F7499F61DE6D35100A9BEC5 /* SYKeyboardTextField.swift in Sources */,
 				7F8CD1131DDD54CF008B3CD0 /* ChatController.swift in Sources */,
