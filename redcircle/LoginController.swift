@@ -230,9 +230,8 @@ class LoginController: UIViewController {
         
         
         if UIScreen.main.bounds.size.height == 480 {
-//            self.registerForKeyboardNotifications()
+            self.registerForKeyboardNotifications()
         }
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -292,6 +291,40 @@ class LoginController: UIViewController {
         let agreementControllerNav = UINavigationController(rootViewController: agreementController)
         self.present(agreementControllerNav, animated: true, completion: nil)
     }
+    
+    
+    
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func keyboardWasShown(notification : NSNotification) {
+        self.logoImageView?.snp.updateConstraints({ (make) -> Void in
+            make.top.equalTo(self.view).offset(-100)
+            make.centerX.equalTo(self.view.snp.centerX)
+            make.width.equalTo(200)
+            make.height.equalTo(200)
+            
+        })
+    }
+    
+    func keyboardWillBeHidden(notification : NSNotification) {
+        self.logoImageView?.snp.updateConstraints({ (make) -> Void in
+            make.top.equalTo(self.view).offset(50)
+            make.centerX.equalTo(self.view.snp.centerX)
+            make.width.equalTo(200)
+            make.height.equalTo(200)
+            
+        })
+    }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.userPhoneTextField?.resignFirstResponder()
+        self.verifyCodeTextField?.resignFirstResponder()
+    }
+    
     
     func gotoHomeController() {
         
