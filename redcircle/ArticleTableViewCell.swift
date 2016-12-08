@@ -373,7 +373,11 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     
     func alert(title: String, message: String) {
         let url = NSURL(string: message) as! URL
-        UIApplication.shared.open(url)
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
 
 }

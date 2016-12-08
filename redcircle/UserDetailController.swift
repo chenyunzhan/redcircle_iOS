@@ -109,7 +109,11 @@ class UserDetailController: UITableViewController {
     func dialMobileAction () {
         if (self.userDic != nil) {
             let phoneNumber = self.userDic!["me_phone"] as! String
-            UIApplication.shared.open(NSURL(string: "tel:" + phoneNumber)! as URL)
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(NSURL(string: "tel:" + phoneNumber)! as URL)
+            } else {
+                UIApplication.shared.openURL(NSURL(string: "tel:" + phoneNumber)! as URL)
+            }
         }
     }
     
