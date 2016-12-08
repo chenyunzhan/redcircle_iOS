@@ -66,10 +66,10 @@ class BookController: UITableViewController {
     
     
     func addRootFriend() -> Void {
-//        let addFriendController = AddFriendController()
-//        addFriendController.hidesBottomBarWhenPushed = true
-//        addFriendController.initWithClosure(someFunctionThatTakesAClosure)
-//        self.navigationController?.pushViewController(addFriendController, animated: true)
+        let addFriendController = AddFriendController()
+        addFriendController.hidesBottomBarWhenPushed = true
+        addFriendController.initWithClosure(closure: someFunctionThatTakesAClosure)
+        self.navigationController?.pushViewController(addFriendController, animated: true)
     }
 
 

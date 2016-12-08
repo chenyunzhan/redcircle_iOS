@@ -12,7 +12,7 @@ class ChatController: RCConversationViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.notifyUpdateUnreadMessageCount()
         // Do any additional setup after loading the view.
     }
 
@@ -22,6 +22,27 @@ class ChatController: RCConversationViewController {
     }
     
 
+    
+    override func notifyUpdateUnreadMessageCount() {
+        super.notifyUpdateUnreadMessageCount()
+        UIApplication.shared.applicationIconBadgeNumber = Int(RCIMClient.shared().getTotalUnreadCount())
+        
+        
+        //需要主线程执行的代码
+        let count = RCIMClient.shared().getTotalUnreadCount()
+        
+        
+        DispatchQueue.main.async(execute: {
+            if (count > 0) {
+                self.navigationController?.tabBarItem.badgeValue = String(count)
+                UIApplication.shared.applicationIconBadgeNumber = Int(count)
+            } else {
+                self.navigationController?.tabBarItem.badgeValue = nil
+                UIApplication.shared.applicationIconBadgeNumber = 0
+                
+            }
+        })
+    }
     /*
     // MARK: - Navigation
 

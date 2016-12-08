@@ -140,11 +140,15 @@ class MeController: UITableViewController {
             cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "reuseIdentifier")
         }
         
+        if (indexPath.section  == 2 && indexPath.row == 0) {
+            cell?.accessoryType = UITableViewCellAccessoryType.none
+        } else {
+            cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        }
+        
         let cellModel = (self.tableData![indexPath.section] as! NSArray)[indexPath.row] as! CellModel
-        cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         cell?.textLabel?.text = cellModel.title
         cell?.detailTextLabel?.text = cellModel.desc
-        
         
         if(indexPath.section == 0) {
             
@@ -178,11 +182,16 @@ class MeController: UITableViewController {
     
     public override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 2) {
-            let cellModel = (self.tableData![indexPath.section] as! NSArray)[indexPath.row] as! CellModel
-            let modifyController = ModifyController()
-            modifyController.subTitle = cellModel.title
-            modifyController.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(modifyController, animated: true)
+            if indexPath.row == 0 {
+                
+            } else {
+                let cellModel = (self.tableData![indexPath.section] as! NSArray)[indexPath.row] as! CellModel
+                let modifyController = ModifyController()
+                modifyController.subTitle = cellModel.title
+                modifyController.hidesBottomBarWhenPushed = true
+                self.navigationController?.pushViewController(modifyController, animated: true)
+            }
+
         } else if (indexPath.section == 3) {
             let loginController = LoginController()
             let loginNavController = UINavigationController(rootViewController: loginController)

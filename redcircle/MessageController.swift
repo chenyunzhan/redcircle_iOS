@@ -20,6 +20,8 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
         super.viewDidLoad()
         
         self.title = "消息"
+        
+        
         RCIM.shared().userInfoDataSource = self
         
         let emptyLabel = UILabel(frame: CGRect(x: 100, y: 100, width: 50, height: 50))
@@ -70,6 +72,9 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
                         
                         RCIM.shared().connect(withToken: token, success: { (userId) -> Void in
                             print("登陆成功。当前登录的用户ID：\(userId)")
+                            
+                            self.notifyUpdateUnreadMessageCount()
+
                             }, error: { (status) -> Void in
                                 print("登陆的错误码为:\(status.rawValue)")
                             }, tokenIncorrect: {
@@ -93,6 +98,8 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
         } else {
             RCIM.shared().connect(withToken: token, success: { (userId) -> Void in
                 print("登陆成功。当前登录的用户ID：\(userId)")
+                self.notifyUpdateUnreadMessageCount()
+
                 }, error: { (status) -> Void in
                     print("登陆的错误码为:\(status.rawValue)")
                 }, tokenIncorrect: {
@@ -169,20 +176,30 @@ class MessageController: RCConversationListViewController, RCIMUserInfoDataSourc
         chat?.title = model.conversationTitle;
         chat?.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chat!, animated: true)
-        self.notifyUpdateUnreadMessageCount()
     }
     
     
-//    //重写RCConversationListViewController的onSelectedTableRow事件
-//    override func onSelectedTableRow(conversationModelType: RCConversationModelType, conversationModel model: RCConversationModel!, atIndexPath indexPath: NSIndexPath!) {
-//        //打开会话界面
-//        let chat = ChatController(conversationType: model.conversationType, targetId: model.targetId)
-//        chat.title = model.conversationTitle;
-//        chat.hidesBottomBarWhenPushed = true
-//        self.navigationController?.pushViewController(chat, animated: true)
-//        self.notifyUpdateUnreadMessageCount()
-//        
-//    }
+    override func notifyUpdateUnreadMessageCount() {
+        super.notifyUpdateUnreadMessageCount()
+        
+        //需要主线程执行的代码
+        let count = RCIMClient.shared().getTotalUnreadCount()
+        
+        
+        DispatchQueue.main.async(execute: {
+            if (count > 0) {
+                self.navigationController?.tabBarItem.badgeValue = String(count)
+                UIApplication.shared.applicationIconBadgeNumber = Int(count)
+            } else {
+                self.navigationController?.tabBarItem.badgeValue = nil
+                UIApplication.shared.applicationIconBadgeNumber = 0
+                
+            }
+        })
+
+        
+
+    }
 
     /*
     // MARK: - Navigation

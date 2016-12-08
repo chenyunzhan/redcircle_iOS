@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7ACECE499E9D34B970D1D3B0 /* Pods_redcircle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45AEEB2A166B33778D4E1836 /* Pods_redcircle.framework */; };
 		7F44E2471DC9CBB300D2313C /* BookTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F44E2461DC9CBB300D2313C /* BookTableViewCell.swift */; };
+		7F47EBD41DF6BAD300964E3D /* AddFriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F47EBD31DF6BAD300964E3D /* AddFriendController.swift */; };
 		7F7387511DEFBD4D00A52BFD /* ModifyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7387501DEFBD4D00A52BFD /* ModifyController.swift */; };
 		7F7499F61DE6D35100A9BEC5 /* SYKeyboardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F7499F51DE6D35100A9BEC5 /* SYKeyboardTextField.swift */; };
 		7F88B5721DED0A610042D5B5 /* AddArticleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F88B5711DED0A610042D5B5 /* AddArticleController.swift */; };
@@ -31,6 +32,7 @@
 		7F9B01A01DC871AD000FB5F8 /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9B019F1DC871AD000FB5F8 /* FriendController.swift */; };
 		7FA230421DE53DE10060EE93 /* MeCircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA230411DE53DE10060EE93 /* MeCircleController.swift */; };
 		7FA230441DE53FD70060EE93 /* ArticleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA230431DE53FD70060EE93 /* ArticleTableViewCell.swift */; };
+		7FACCC001DF7A94600EB4998 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FACCBFF1DF7A94600EB4998 /* UserNotifications.framework */; };
 		7FCE42041DD1BA9000677CE9 /* UserDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCE42031DD1BA9000677CE9 /* UserDetailController.swift */; };
 		7FCE42061DD1BBB500677CE9 /* ModifyRelationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCE42051DD1BBB500677CE9 /* ModifyRelationController.swift */; };
 /* End PBXBuildFile section */
@@ -39,6 +41,7 @@
 		45AEEB2A166B33778D4E1836 /* Pods_redcircle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_redcircle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F069C3D86662175E61EEB /* Pods-redcircle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.release.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.release.xcconfig"; sourceTree = "<group>"; };
 		7F44E2461DC9CBB300D2313C /* BookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
+		7F47EBD31DF6BAD300964E3D /* AddFriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendController.swift; sourceTree = "<group>"; };
 		7F7387501DEFBD4D00A52BFD /* ModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyController.swift; sourceTree = "<group>"; };
 		7F7499F51DE6D35100A9BEC5 /* SYKeyboardTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SYKeyboardTextField.swift; sourceTree = "<group>"; };
 		7F88B5711DED0A610042D5B5 /* AddArticleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddArticleController.swift; sourceTree = "<group>"; };
@@ -64,6 +67,8 @@
 		7F9B019F1DC871AD000FB5F8 /* FriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
 		7FA230411DE53DE10060EE93 /* MeCircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeCircleController.swift; sourceTree = "<group>"; };
 		7FA230431DE53FD70060EE93 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
+		7FACCBFF1DF7A94600EB4998 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		7FACCC011DF7B14A00EB4998 /* redcircle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = redcircle.entitlements; sourceTree = "<group>"; };
 		7FCE42031DD1BA9000677CE9 /* UserDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailController.swift; sourceTree = "<group>"; };
 		7FCE42051DD1BBB500677CE9 /* ModifyRelationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyRelationController.swift; sourceTree = "<group>"; };
 		8C44387682479EDB9B7C8820 /* Pods-redcircle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.debug.xcconfig"; sourceTree = "<group>"; };
@@ -74,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FACCC001DF7A94600EB4998 /* UserNotifications.framework in Frameworks */,
 				7ACECE499E9D34B970D1D3B0 /* Pods_redcircle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -137,6 +143,7 @@
 		7F9904361DC711970007B681 /* redcircle */ = {
 			isa = PBXGroup;
 			children = (
+				7FACCC011DF7B14A00EB4998 /* redcircle.entitlements */,
 				7F7499EF1DE6D1B100A9BEC5 /* util */,
 				7F44E2451DC9CB8600D2313C /* view */,
 				7F99044B1DC735530007B681 /* redcircle-Bridging-Header.h */,
@@ -162,6 +169,7 @@
 				7F88B5711DED0A610042D5B5 /* AddArticleController.swift */,
 				7F88B5751DED5BCB0042D5B5 /* BaseViewController.swift */,
 				7F7387501DEFBD4D00A52BFD /* ModifyController.swift */,
+				7F47EBD31DF6BAD300964E3D /* AddFriendController.swift */,
 			);
 			path = redcircle;
 			sourceTree = "<group>";
@@ -169,6 +177,7 @@
 		A2E5309D03F3AEDD54C6D759 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7FACCBFF1DF7A94600EB4998 /* UserNotifications.framework */,
 				45AEEB2A166B33778D4E1836 /* Pods_redcircle.framework */,
 			);
 			name = Frameworks;
@@ -211,6 +220,11 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 8PWWXHNFJ7;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -319,6 +333,7 @@
 				7F9B01A01DC871AD000FB5F8 /* FriendController.swift in Sources */,
 				7F88B5741DED3EFF0042D5B5 /* UtilManager.swift in Sources */,
 				7F9904381DC711970007B681 /* AppDelegate.swift in Sources */,
+				7F47EBD41DF6BAD300964E3D /* AddFriendController.swift in Sources */,
 				7F9B01941DC83C9D000FB5F8 /* MeController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,9 +461,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = redcircle/redcircle.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8PWWXHNFJ7;
 				INFOPLIST_FILE = redcircle/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloud.redcircle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -465,9 +482,11 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = redcircle/redcircle.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = 8PWWXHNFJ7;
 				INFOPLIST_FILE = redcircle/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.cloud.redcircle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
