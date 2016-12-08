@@ -40,6 +40,11 @@
 /* Begin PBXFileReference section */
 		45AEEB2A166B33778D4E1836 /* Pods_redcircle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_redcircle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A0F069C3D86662175E61EEB /* Pods-redcircle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.release.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.release.xcconfig"; sourceTree = "<group>"; };
+		7F2164001DF90846006A4D83 /* 红圈开发证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈开发证书.p12"; sourceTree = "<group>"; };
+		7F2164011DF9088C006A4D83 /* 红圈生产证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈生产证书.p12"; sourceTree = "<group>"; };
+		7F2164021DF90894006A4D83 /* 红圈生产推送证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈生产推送证书.p12"; sourceTree = "<group>"; };
+		7F2164031DF90899006A4D83 /* 红圈开发推送证书.p12 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "红圈开发推送证书.p12"; sourceTree = "<group>"; };
+		7F2164041DF908B3006A4D83 /* readme.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = readme.strings; sourceTree = "<group>"; };
 		7F44E2461DC9CBB300D2313C /* BookTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookTableViewCell.swift; sourceTree = "<group>"; };
 		7F47EBD31DF6BAD300964E3D /* AddFriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendController.swift; sourceTree = "<group>"; };
 		7F7387501DEFBD4D00A52BFD /* ModifyController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyController.swift; sourceTree = "<group>"; };
@@ -96,6 +101,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		7F2163FF1DF9081E006A4D83 /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				7F2164041DF908B3006A4D83 /* readme.strings */,
+				7F2164031DF90899006A4D83 /* 红圈开发推送证书.p12 */,
+				7F2164021DF90894006A4D83 /* 红圈生产推送证书.p12 */,
+				7F2164011DF9088C006A4D83 /* 红圈生产证书.p12 */,
+				7F2164001DF90846006A4D83 /* 红圈开发证书.p12 */,
+			);
+			name = doc;
+			sourceTree = "<group>";
+		};
 		7F44E2451DC9CB8600D2313C /* view */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +160,7 @@
 		7F9904361DC711970007B681 /* redcircle */ = {
 			isa = PBXGroup;
 			children = (
+				7F2163FF1DF9081E006A4D83 /* doc */,
 				7FACCC011DF7B14A00EB4998 /* redcircle.entitlements */,
 				7F7499EF1DE6D1B100A9BEC5 /* util */,
 				7F44E2451DC9CB8600D2313C /* view */,
