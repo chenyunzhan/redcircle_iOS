@@ -9,8 +9,10 @@
 * app下载地址：https://itunes.apple.com/cn/app/hong-quan/id1098028444?mt=8
 
 ## 效果图展示
- <img src="https://raw.githubusercontent.com/chenyunzhan/redcircle_iOS/master/redcircle/2.png" width = "300" height = "200" alt="图片名称" align=center />
-
+![ScreenShot](https://raw.githubusercontent.com/chenyunzhan/redcircle_iOS/master/redcircle/2.png= 100x100)
+![ScreenShot](https://raw.githubusercontent.com/chenyunzhan/redcircle_iOS/master/redcircle/3.png= 100x100)
+![ScreenShot](https://raw.githubusercontent.com/chenyunzhan/redcircle_iOS/master/redcircle/4.png= 100x100)
+![ScreenShot](https://raw.githubusercontent.com/chenyunzhan/redcircle_iOS/master/redcircle/5.png= 100x100)
 
 
 ### 致谢
