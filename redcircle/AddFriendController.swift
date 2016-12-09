@@ -81,7 +81,7 @@ class AddFriendController: UIViewController {
         
         
         let userPhoneTextField = UITextField()
-        userPhoneTextField.placeholder = "请输入您的手机号"
+        userPhoneTextField.placeholder = "请输入朋友的手机号"
         self.view.addSubview(userPhoneTextField)
         self.userPhoneTextField = userPhoneTextField
         

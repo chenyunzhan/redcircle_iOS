@@ -193,7 +193,9 @@ class ArticleTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
+        if (self.imageData == nil) {
+            return 0
+        }
         return (self.imageData?.count)!-1
     }
     

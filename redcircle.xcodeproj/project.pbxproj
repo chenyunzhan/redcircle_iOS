@@ -35,6 +35,7 @@
 		7FACCC001DF7A94600EB4998 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FACCBFF1DF7A94600EB4998 /* UserNotifications.framework */; };
 		7FCE42041DD1BA9000677CE9 /* UserDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCE42031DD1BA9000677CE9 /* UserDetailController.swift */; };
 		7FCE42061DD1BBB500677CE9 /* ModifyRelationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FCE42051DD1BBB500677CE9 /* ModifyRelationController.swift */; };
+		7FFA0A921DF95DC800B8A55A /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FFA0A911DF95DC800B8A55A /* BaseTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		7FACCC011DF7B14A00EB4998 /* redcircle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = redcircle.entitlements; sourceTree = "<group>"; };
 		7FCE42031DD1BA9000677CE9 /* UserDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailController.swift; sourceTree = "<group>"; };
 		7FCE42051DD1BBB500677CE9 /* ModifyRelationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyRelationController.swift; sourceTree = "<group>"; };
+		7FFA0A911DF95DC800B8A55A /* BaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		8C44387682479EDB9B7C8820 /* Pods-redcircle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-redcircle.debug.xcconfig"; path = "Pods/Target Support Files/Pods-redcircle/Pods-redcircle.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,6 +190,7 @@
 				7F88B5751DED5BCB0042D5B5 /* BaseViewController.swift */,
 				7F7387501DEFBD4D00A52BFD /* ModifyController.swift */,
 				7F47EBD31DF6BAD300964E3D /* AddFriendController.swift */,
+				7FFA0A911DF95DC800B8A55A /* BaseTableViewController.swift */,
 			);
 			path = redcircle;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				7FCE42061DD1BBB500677CE9 /* ModifyRelationController.swift in Sources */,
 				7FA230421DE53DE10060EE93 /* MeCircleController.swift in Sources */,
 				7F99044A1DC716EF0007B681 /* LoginController.swift in Sources */,
+				7FFA0A921DF95DC800B8A55A /* BaseTableViewController.swift in Sources */,
 				7F9B01A01DC871AD000FB5F8 /* FriendController.swift in Sources */,
 				7F88B5741DED3EFF0042D5B5 /* UtilManager.swift in Sources */,
 				7F9904381DC711970007B681 /* AppDelegate.swift in Sources */,

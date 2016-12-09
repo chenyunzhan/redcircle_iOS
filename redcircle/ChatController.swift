@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import SKPhotoBrowser
 
-class ChatController: RCConversationViewController {
+
+class ChatController: RCConversationViewController, SKPhotoBrowserDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +44,21 @@ class ChatController: RCConversationViewController {
                 
             }
         })
+    }
+    
+    
+    override func didTapCellPortrait(_ userId: String!) {
+        super.didTapCellPortrait(userId)
+        // add SKPhoto Array from UIImage
+        var images = [SKPhoto]()
+        let photo = SKPhoto.photoWithImageURL(AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + userId + "&type=original")
+        images.append(photo)
+        
+        // create PhotoBrowser Instance, and present.
+        let browser = SKPhotoBrowser(photos: images)
+        browser.initializePageIndex(0)
+        browser.delegate = self
+        present(browser, animated: true, completion: {})
     }
     /*
     // MARK: - Navigation

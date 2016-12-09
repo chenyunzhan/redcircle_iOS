@@ -12,7 +12,7 @@ import FontAwesome_swift
 import SnapKit
 import Alamofire
 
-class LoginController: UIViewController {
+class LoginController: BaseViewController {
     
     
     var userPhoneTextField: UITextField?
@@ -229,7 +229,7 @@ class LoginController: UIViewController {
         registerButton.addTarget(self, action: #selector(LoginController.gotoRegisterController), for: UIControlEvents.touchUpInside)
         
         
-        if UIScreen.main.bounds.size.height == 480 {
+        if UIScreen.main.bounds.size.height == 480 || UIScreen.main.bounds.size.height == 568 {
             self.registerForKeyboardNotifications()
         }
     }
@@ -269,6 +269,8 @@ class LoginController: UIViewController {
     func doLoginAction() {
         
         
+        self.startLoadingView()
+        
         SMSSDK.commitVerificationCode(self.verifyCodeTextField?.text, phoneNumber: self.userPhoneTextField?.text, zone: "86") { (userInfo, error) in
             if (error == nil) {
                 self.gotoHomeController()
@@ -276,6 +278,7 @@ class LoginController: UIViewController {
                 
             } else {
                 print("错误信息：%@",error ?? "")
+                self.stopLoadingView()
                 if ("15891739884" == self.userPhoneTextField?.text) {
                     self.gotoHomeController()
                 }
@@ -295,27 +298,36 @@ class LoginController: UIViewController {
     
     
     func registerForKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWasShown(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LoginController.keyboardWillBeHidden(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     func keyboardWasShown(notification : NSNotification) {
-        self.logoImageView?.snp.updateConstraints({ (make) -> Void in
-            make.top.equalTo(self.view).offset(-100)
-            make.centerX.equalTo(self.view.snp.centerX)
-            make.width.equalTo(200)
-            make.height.equalTo(200)
-            
+
+        UIView.animate(withDuration: 1, delay:0.01,options:UIViewAnimationOptions.transitionFlipFromLeft, animations: { () -> Void in
+            self.logoImageView?.snp.updateConstraints({ (make) -> Void in
+                make.top.equalTo(self.view).offset(-100)
+                make.centerX.equalTo(self.view.snp.centerX)
+                make.width.equalTo(200)
+                make.height.equalTo(200)
+                
+            })
         })
+
+        
+
     }
     
     func keyboardWillBeHidden(notification : NSNotification) {
-        self.logoImageView?.snp.updateConstraints({ (make) -> Void in
-            make.top.equalTo(self.view).offset(50)
-            make.centerX.equalTo(self.view.snp.centerX)
-            make.width.equalTo(200)
-            make.height.equalTo(200)
-            
+        
+        UIView.animate(withDuration: 1, animations: { () -> Void in
+            self.logoImageView?.snp.updateConstraints({ (make) -> Void in
+                make.top.equalTo(self.view).offset(50)
+                make.centerX.equalTo(self.view.snp.centerX)
+                make.width.equalTo(200)
+                make.height.equalTo(200)
+                
+            })
         })
     }
     
@@ -335,6 +347,8 @@ class LoginController: UIViewController {
             "mePhone": mePhone
             ]
         Alamofire.request(AppDelegate.baseURLString + "/login", method: .post, parameters: parameters, encoding: JSONEncoding.default).responseJSON { (response) in
+            
+            self.stopLoadingView()
             
             switch response.result {
             case .success:

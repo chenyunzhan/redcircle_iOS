@@ -12,7 +12,7 @@ import ImagePickerSheetController
 import Photos
 
 
-class MeController: UITableViewController {
+class MeController: BaseTableViewController {
     
     
     var tableData: NSMutableArray?
@@ -50,7 +50,7 @@ class MeController: UITableViewController {
         
         let cellModel5 = CellModel()
         cellModel5.title = "头像"
-        cellModel5.image = AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + (userDic!["mePhone"] as! String)
+        cellModel5.image = AppDelegate.baseURLString + "/downPhotoByPhone?mePhone=" + (userDic!["mePhone"] as! String) + "&type=thumbnail"
         let cellModel6 = CellModel()
         cellModel6.title = "红圈"
         cellModel6.desc = ""
@@ -308,7 +308,27 @@ class MeController: UITableViewController {
     }
     
     
+    func cacheUploadImageWithTake(originalImage:UIImage) -> Void {
+        
+        let newImage1 = self.resizeImage(image: originalImage, newSize: CGSize(width: 80, height: 80))
+        let filePath1:String = NSHomeDirectory() + "/Documents/photo_temp_thumbnail.png"
+        let data1:NSData = UIImagePNGRepresentation(newImage1)! as NSData
+        data1.write(toFile: filePath1, atomically: true)
+        
+        let newImage2 = self.resizeImage(image: originalImage, newSize: CGSize(width: 600, height: 600))
+        let filePath2:String = NSHomeDirectory() +  "/Documents/photo_temp.png"
+        let data2:NSData = UIImagePNGRepresentation(newImage2)! as NSData
+        data2.write(toFile: filePath2, atomically: true)
+        
+        self.uploadPhoto()
+    }
+    
+    
     func uploadPhoto() {
+        
+        self.startLoadingView()
+        
+        
         let fileStr = NSHomeDirectory() + "/Documents/photo_temp.png"
         let fileURL = NSURL(fileURLWithPath: fileStr)
         
@@ -333,6 +353,7 @@ class MeController: UITableViewController {
                         self.updateUser()
                     }
                 case .failure(let encodingError):
+                    self.stopLoadingView()
                     print(encodingError)
                 }
             }
@@ -356,6 +377,7 @@ class MeController: UITableViewController {
             
             switch response.result {
             case .success:
+                self.stopLoadingView()
                 let userDic = response.result.value as? NSDictionary
                 UserDefaults.standard.set(userDic, forKey: "USER_INFO")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "USER_INFO_CHANGE"), object: self)
@@ -394,6 +416,8 @@ extension MeController: UIImagePickerControllerDelegate, UINavigationControllerD
     }
     
     
+
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         //        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
         //
@@ -403,6 +427,12 @@ extension MeController: UIImagePickerControllerDelegate, UINavigationControllerD
         guard let assetURL = info[UIImagePickerControllerReferenceURL] as? NSURL else {
             if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
                 print(image)
+                
+                
+                picker.dismiss(animated: true, completion: nil)
+                self.cacheUploadImageWithTake(originalImage: image)
+                
+
             }
             return
         }
@@ -422,6 +452,27 @@ extension MeController: UIImagePickerControllerDelegate, UINavigationControllerD
         
         
     }
+    
+    
+    
+    /**
+     *  获得指定size的图片
+     *
+     *  image   原始图片
+     *  newSize 指定的size
+     *
+     *  return 调整后的图片
+     */
+    func resizeImage(image: UIImage, newSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(newSize)
+        image.draw(in: CGRect(x: 0, y: 0, width: newSize.width, height: newSize.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+
     
     
 }

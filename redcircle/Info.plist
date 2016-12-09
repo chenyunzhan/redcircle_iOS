@@ -31,6 +31,8 @@
 	<string>请允许访问麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>请允许访问相册</string>
+	<key>NSCameraUsageDescription</key>
+	<string>请允许访问摄像头</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
