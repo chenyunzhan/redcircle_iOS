@@ -73,6 +73,12 @@
 		7F9B019F1DC871AD000FB5F8 /* FriendController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
 		7FA230411DE53DE10060EE93 /* MeCircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeCircleController.swift; sourceTree = "<group>"; };
 		7FA230431DE53FD70060EE93 /* ArticleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTableViewCell.swift; sourceTree = "<group>"; };
+		7FA82A591DFA99A400ECA0A5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		7FA82A5A1DFAB08600ECA0A5 /* 1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1.png; sourceTree = "<group>"; };
+		7FA82A5B1DFAB08600ECA0A5 /* 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 2.png; sourceTree = "<group>"; };
+		7FA82A5C1DFAB08600ECA0A5 /* 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3.png; sourceTree = "<group>"; };
+		7FA82A5D1DFAB08600ECA0A5 /* 4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 4.png; sourceTree = "<group>"; };
+		7FA82A5E1DFAB08600ECA0A5 /* 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5.png; sourceTree = "<group>"; };
 		7FACCBFF1DF7A94600EB4998 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		7FACCC011DF7B14A00EB4998 /* redcircle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = redcircle.entitlements; sourceTree = "<group>"; };
 		7FCE42031DD1BA9000677CE9 /* UserDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailController.swift; sourceTree = "<group>"; };
@@ -106,6 +112,12 @@
 		7F2163FF1DF9081E006A4D83 /* doc */ = {
 			isa = PBXGroup;
 			children = (
+				7FA82A5A1DFAB08600ECA0A5 /* 1.png */,
+				7FA82A5B1DFAB08600ECA0A5 /* 2.png */,
+				7FA82A5C1DFAB08600ECA0A5 /* 3.png */,
+				7FA82A5D1DFAB08600ECA0A5 /* 4.png */,
+				7FA82A5E1DFAB08600ECA0A5 /* 5.png */,
+				7FA82A591DFA99A400ECA0A5 /* README.md */,
 				7F2164041DF908B3006A4D83 /* readme.strings */,
 				7F2164031DF90899006A4D83 /* 红圈开发推送证书.p12 */,
 				7F2164021DF90894006A4D83 /* 红圈生产推送证书.p12 */,
