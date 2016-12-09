@@ -15,6 +15,7 @@
   <img src="https://raw.githubusercontent.com/chenyunzhan/redcircle_iOS/master/redcircle/3.png" width = "250" height = "444" alt="图片名称"/>
  <img src="https://raw.githubusercontent.com/chenyunzhan/redcircle_iOS/master/redcircle/4.png" width = "250" height = "444" alt="图片名称"/>
  <img src="https://raw.githubusercontent.com/chenyunzhan/redcircle_iOS/master/redcircle/5.png" width = "250" height = "444" alt="图片名称"/>
+ <img src="https://raw.githubusercontent.com/chenyunzhan/redcircle_iOS/master/redcircle/6.png" width = "250" height = "444" alt="图片名称"/>
 
 
 
